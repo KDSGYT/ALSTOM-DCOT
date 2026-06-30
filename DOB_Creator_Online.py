@@ -9,17 +9,18 @@ st.set_page_config(
 st.header('Alstom-DCOT')
 
 with st.form("my_form"): 
-    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns(8)
+    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
 
-    col1.subheader('DOB Cover Page');   col1.write('Leave blank to use Default cover page'); dob_cover_page    = col1.file_uploader(' ',        type=['pdf'])
-    col2.subheader('DON Cover Page');   col2.write('Leave blank to use Default cover page'); don_cover_page    = col2.file_uploader('  ',       type=['pdf'])
-    col3.subheader('Greater Metro') ;   col3.write('                                     '); gta               = col3.file_uploader('   ',      type=['pdf'])
-    col4.subheader('Metrolinx Bala');   col4.write('                                     '); bala              = col4.file_uploader('    ',     type=['pdf'])
-    col5.subheader('Metrolinx DON');    col5.write('                                     '); don               = col5.file_uploader('     ',    type=['pdf'])
-    col6.subheader('CPKC West');        col6.write('                                     '); cp_west           = col6.file_uploader('      ',   type=['pdf'])
-    col7.subheader('CPKC Hamilton');    col7.write('                                     '); cp_hamilton       = col7.file_uploader('       ',  type=['pdf'])
-    col8.subheader('Metrolinx Guelph'); col8.write('                                     '); metrolinx_guelph  = col8.file_uploader('        ', type=['pdf'])
+    col1.subheader('DOB Cover Page');                   col1.write('Leave blank to use Default cover page'); dob_cover_page    = col1.file_uploader(' ',         type=['pdf'])
+    col2.subheader('DON Cover Page');                   col2.write('Leave blank to use Default cover page'); don_cover_page    = col2.file_uploader('  ',        type=['pdf'])
+    col3.subheader('Greater Metro') ;                   col3.write('                                     '); gta               = col3.file_uploader('   ',       type=['pdf'])
+    col4.subheader('Metrolinx Bala');                   col4.write('                                     '); bala              = col4.file_uploader('    ',      type=['pdf'])
+    col5.subheader('Metrolinx DON');                    col5.write('                                     '); don               = col5.file_uploader('     ',     type=['pdf'])
+    col6.subheader('CPKC West');                        col6.write('                                     '); cp_west           = col6.file_uploader('      ',    type=['pdf'])
+    col7.subheader('CPKC Hamilton');                    col7.write('                                     '); cp_hamilton       = col7.file_uploader('       ',   type=['pdf'])
+    col8.subheader('Metrolinx Guelph');                 col8.write('                                     '); metrolinx_guelph  = col8.file_uploader('        ',  type=['pdf'])
+    col9.subheader('DOB Goderich & Exeter Railway');    col9.write('                                     '); goderich_exeter   = col9.file_uploader('         ', type=['pdf'])
 
     st.divider()
     
@@ -42,6 +43,7 @@ DOB_to_email_files =  [ gta, bala,
                         don, cp_west, cp_hamilton,
                         './PDFs/CPKC Signal Authority Form (Apr10).pdf',
                         metrolinx_guelph,
+                        goderich_exeter,
                         './PDFs/Radio Channel Guide July 23rd.pdf'
                         ]
 DOB_to_print_files = [dob_cover_page] + DOB_to_email_files
