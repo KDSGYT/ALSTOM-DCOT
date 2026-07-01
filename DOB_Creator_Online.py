@@ -8,22 +8,42 @@ st.set_page_config(
 
 st.header('Alstom-DCOT')
 
-with st.form("my_form"): 
+
+def pdf_uploader(column, title, helper_text, label, key_prefix):
+    reset_key = f'{key_prefix}_reset'
+    if reset_key not in st.session_state:
+        st.session_state[reset_key] = 0
+
+    column.subheader(title)
+    column.write(helper_text)
+    uploaded_file = column.file_uploader(
+        label,
+        type=['pdf'],
+        key=f'{key_prefix}_{st.session_state[reset_key]}'
+    )
+    if uploaded_file is not None:
+        if column.form_submit_button('Remove file', key=f'remove_{key_prefix}'):
+            st.session_state[reset_key] += 1
+            st.rerun()
+
+    return uploaded_file
+
+
+with st.form("my_form"):
     col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
-
-    col1.subheader('DOB Cover Page');                   col1.write('Leave blank to use Default cover page'); dob_cover_page    = col1.file_uploader(' ',         type=['pdf'])
-    col2.subheader('DON Cover Page');                   col2.write('Leave blank to use Default cover page'); don_cover_page    = col2.file_uploader('  ',        type=['pdf'])
-    col3.subheader('Greater Metro') ;                   col3.write('                                     '); gta               = col3.file_uploader('   ',       type=['pdf'])
-    col4.subheader('Metrolinx Bala');                   col4.write('                                     '); bala              = col4.file_uploader('    ',      type=['pdf'])
-    col5.subheader('Metrolinx DON');                    col5.write('                                     '); don               = col5.file_uploader('     ',     type=['pdf'])
-    col6.subheader('CPKC West');                        col6.write('                                     '); cp_west           = col6.file_uploader('      ',    type=['pdf'])
-    col7.subheader('CPKC Hamilton');                    col7.write('                                     '); cp_hamilton       = col7.file_uploader('       ',   type=['pdf'])
-    col8.subheader('Metrolinx Guelph');                 col8.write('                                     '); metrolinx_guelph  = col8.file_uploader('        ',  type=['pdf'])
-    col9.subheader('DOB Goderich & Exeter Railway');    col9.write('                                     '); goderich_exeter   = col9.file_uploader('         ', type=['pdf'])
+    dob_cover_page   = pdf_uploader(col1, 'DOB Cover Page', 'Leave blank to use Default cover page', ' ', 'dob_cover_page')
+    don_cover_page   = pdf_uploader(col2, 'DON Cover Page', 'Leave blank to use Default cover page', '  ', 'don_cover_page')
+    gta              = pdf_uploader(col3, 'Greater Metro', '                                     ', '   ', 'gta')
+    bala             = pdf_uploader(col4, 'Metrolinx Bala', '                                     ', '    ', 'bala')
+    don              = pdf_uploader(col5, 'Metrolinx DON', '                                     ', '     ', 'don')
+    cp_west          = pdf_uploader(col6, 'CPKC West', '                                     ', '      ', 'cp_west')
+    cp_hamilton      = pdf_uploader(col7, 'CPKC Hamilton', '                                     ', '       ', 'cp_hamilton')
+    metrolinx_guelph = pdf_uploader(col8, 'Metrolinx Guelph', '                                     ', '        ', 'metrolinx_guelph')
+    goderich_exeter  = pdf_uploader(col9, 'DOB Goderich & Exeter Railway', '                                     ', '         ', 'goderich_exeter')
 
     st.divider()
-    
+
     st.form_submit_button('Create Packages') 
     
 
