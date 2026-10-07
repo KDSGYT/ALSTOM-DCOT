@@ -130,7 +130,7 @@ DOB_SLOTS = [
         'key': 'radio_channel_guide',
         'title': 'Radio Channel Guide',
         'source': 'builtin',
-        'path': './PDFs/Radio Channel Guide July 23rd.pdf',
+        'path': './PDFs/Radio Channel Guide.pdf',
     },
     {
         'key': 'stratford_tgbos',
